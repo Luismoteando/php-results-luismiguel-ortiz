@@ -11,7 +11,9 @@
 
 namespace MiW\Results\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * Class Result
@@ -24,7 +26,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     }
  * )
  */
-class Result implements \JsonSerializable
+class Result implements JsonSerializable
 {
     /**
      * Result id
@@ -74,7 +76,7 @@ class Result implements \JsonSerializable
     /**
      * Result time
      *
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(
      *     name     = "time",
@@ -87,19 +89,20 @@ class Result implements \JsonSerializable
     /**
      * Result constructor.
      *
-     * @param int       $result result
-     * @param User      $user   user
-     * @param \DateTime $time   time
+     * @param int $result result
+     * @param User $user user
+     * @param DateTime $time time
      */
     public function __construct(
         int $result = 0,
         User $user = null,
-        \DateTime $time = null
-    ) {
-        $this->id     = 0;
+        DateTime $time = null
+    )
+    {
+        $this->id = 0;
         $this->result = $result;
-        $this->user   = $user;
-        $this->time   = $time;
+        $this->user = $user;
+        $this->time = $time;
     }
 
     /**
@@ -108,6 +111,54 @@ class Result implements \JsonSerializable
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getResult(): int
+    {
+        return $this->result;
+    }
+
+    /**
+     * @param int $result
+     */
+    public function setResult(int $result): void
+    {
+        $this->result = $result;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user): void
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getTime(): DateTime
+    {
+        return $this->time;
+    }
+
+    /**
+     * @param DateTime $time
+     */
+    public function setTime(DateTime $time): void
+    {
+        $this->time = $time;
     }
 
     /**
@@ -138,10 +189,10 @@ class Result implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return array(
-            'id'     => $this->id,
+            'id' => $this->id,
             'result' => $this->result,
-            'user'   => $this->user,
-            'time'   => $this->time->format('Y-m-d H:i:s')
+            'user' => $this->user,
+            'time' => $this->time->format('Y-m-d H:i:s')
         );
     }
 }

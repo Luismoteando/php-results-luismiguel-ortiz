@@ -1,0 +1,16 @@
+# routes.yaml
+---
+route_root:
+  path: /
+  controller: 'homeController'
+  methods: [ GET ]
+
+route_results_list:
+  path: /results/list
+  controller: 'resultsListingController'
+  methods: [ GET ]
+
+route_users_list:
+  path: /users/list
+  controller: 'usersListingController'
+  methods: [ GET ]
