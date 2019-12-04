@@ -11,14 +11,14 @@
 use MiW\Results\Entity\Result;
 use MiW\Results\Utils;
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 // Carga las variables de entorno
-Utils::loadEnv(__DIR__ . '/../');
+Utils::loadEnv(__DIR__ . '/../../');
 
 $entityManager = Utils::getEntityManager();
 
-if ($argc !== 2) {
+if ($argc < 2 || $argc > 3) {
     $fich = basename(__FILE__);
     echo <<< MARCA_FIN
 

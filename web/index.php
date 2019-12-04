@@ -8,7 +8,7 @@
  */
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../src/controllers.php';
+require_once __DIR__ . '/../src/Controller/BaseController.php';
 
 use MiW\Results\Utils;
 use Symfony\Component\Config\FileLocator;
@@ -32,7 +32,8 @@ $path_info = filter_input(INPUT_SERVER, 'PATH_INFO') ?? '/';
 try {
     $parameters = $matcher->match($path_info);
     $action = $parameters['_controller'];
-    $action();
+    $param1 = $parameters['id'] ?? null;
+    $action($param1);
 } catch (ResourceNotFoundException $e) {
     echo 'Caught exception: The resource could not be found' . PHP_EOL;
 } catch (MethodNotAllowedException $e) {

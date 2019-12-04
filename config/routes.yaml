@@ -1,6 +1,6 @@
 # routes.yaml
 ---
-route_root:
+route_home:
   path: /
   controller: 'homeController'
   methods: [ GET ]
@@ -10,7 +10,37 @@ route_results_list:
   controller: 'resultsListingController'
   methods: [ GET ]
 
+route_new_result:
+  path:       /results/new
+  controller: 'newResultController'
+  methods:   [ GET, POST ]
+
+route_delete_result:
+  path:       /results/delete/{id}
+  controller: 'deleteResultController'
+  methods:   [ GET ]
+
+route_update_result:
+  path:       /results/update/{id}
+  controller: 'updateResultController'
+  methods:   [ GET ]
+
 route_users_list:
   path: /users/list
   controller: 'usersListingController'
   methods: [ GET ]
+
+route_new_user:
+  path:       /users/new
+  controller: 'newUserController'
+  methods:   [ GET, POST ]
+
+route_delete_user:
+  path:       /users/delete/{id}
+  controller: 'deleteUserController'
+  methods:   [ GET ]
+
+route_update_user:
+  path:       /users/update/{id}
+  controller: 'updateUserController'
+  methods:   [ GET ]

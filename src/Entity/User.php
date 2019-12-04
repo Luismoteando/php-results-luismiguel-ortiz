@@ -12,6 +12,7 @@
 namespace MiW\Results\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * User
@@ -29,7 +30,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     )
  * @ORM\Entity
  */
-class User implements \JsonSerializable
+class User implements JsonSerializable
 {
     /**
      * Id
@@ -254,7 +255,12 @@ class User implements \JsonSerializable
      */
     public function __toString(): string
     {
-        return $this->username;
+        return sprintf(
+            '%3d - %s - %s',
+            $this->id,
+            $this->username,
+            $this->email
+        );
     }
 
     /**
