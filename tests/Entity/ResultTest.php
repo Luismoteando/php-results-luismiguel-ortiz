@@ -11,15 +11,18 @@
 
 namespace MiW\Results\Tests\Entity;
 
+use DateTime;
+use Exception;
 use MiW\Results\Entity\Result;
 use MiW\Results\Entity\User;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class ResultTest
  *
  * @package MiW\Results\Tests\Entity
  */
-class ResultTest extends \PHPUnit\Framework\TestCase
+class ResultTest extends TestCase
 {
     /**
      * @var User $user
@@ -35,7 +38,7 @@ class ResultTest extends \PHPUnit\Framework\TestCase
     private const POINTS = 2018;
 
     /**
-     * @var \DateTime $time
+     * @var DateTime $time
      */
     private $time;
 
@@ -44,12 +47,13 @@ class ResultTest extends \PHPUnit\Framework\TestCase
      * This method is called before a test is executed.
      *
      * @return void
+     * @throws Exception
      */
     protected function setUp(): void
     {
         $this->user = new User();
         $this->user->setUsername(self::USERNAME);
-        $this->time = new \DateTime('now');
+        $this->time = new DateTime('now');
         $this->result = new Result(
             self::POINTS,
             $this->user,
@@ -70,9 +74,15 @@ class ResultTest extends \PHPUnit\Framework\TestCase
      */
     public function testConstructor(): void
     {
-        self::markTestIncomplete(
-            'This test has not been implemented yet.'
+        $result = new Result(
+            self::POINTS,
+            $this->user,
+            $this->time
         );
+        self::assertEquals(self::POINTS, $result->getResult());
+        self::assertEquals(self::POINTS, $result->getResult());
+        self::assertEquals($this->user, $result->getUser());
+        self::assertEquals($this->time, $result->getTime());
     }
 
     /**
@@ -81,15 +91,15 @@ class ResultTest extends \PHPUnit\Framework\TestCase
      * @covers \MiW\Results\Entity\Result::getId()
      * @return void
      */
-    public function testGetId():void
+    public function testGetId(): void
     {
-        self::markTestIncomplete(
-            'This test has not been implemented yet.'
+        self::assertIsNumeric(
+            $this->result->getId()
         );
     }
 
     /**
-     * Implement testUsername().
+     * Implement testResult().
      *
      * @covers \MiW\Results\Entity\Result::setResult
      * @covers \MiW\Results\Entity\Result::getResult
@@ -97,8 +107,10 @@ class ResultTest extends \PHPUnit\Framework\TestCase
      */
     public function testResult(): void
     {
-        self::markTestIncomplete(
-            'This test has not been implemented yet.'
+        $this->result->setResult(self::POINTS);
+        self::assertEquals(
+            self::POINTS,
+            $this->result->getResult()
         );
     }
 
@@ -111,8 +123,10 @@ class ResultTest extends \PHPUnit\Framework\TestCase
      */
     public function testUser(): void
     {
-        self::markTestIncomplete(
-            'This test has not been implemented yet.'
+        $this->result->setUser($this->user);
+        self::assertEquals(
+            $this->user,
+            $this->result->getUser()
         );
     }
 
@@ -122,11 +136,14 @@ class ResultTest extends \PHPUnit\Framework\TestCase
      * @covers \MiW\Results\Entity\Result::setTime
      * @covers \MiW\Results\Entity\Result::getTime
      * @return void
+     * @throws Exception
      */
     public function testTime(): void
     {
-        self::markTestIncomplete(
-            'This test has not been implemented yet.'
+        $this->result->setTime($this->time);
+        self::assertEquals(
+            $this->time,
+            $this->result->getTime()
         );
     }
 
@@ -138,9 +155,8 @@ class ResultTest extends \PHPUnit\Framework\TestCase
      */
     public function testToString(): void
     {
-        self::markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $vars = get_object_vars($this->result);
+        self::assertEmpty($vars, $this->result->__toString());
     }
 
     /**
@@ -151,8 +167,9 @@ class ResultTest extends \PHPUnit\Framework\TestCase
      */
     public function testJsonSerialize(): void
     {
-        self::markTestIncomplete(
-            'This test has not been implemented yet.'
+        $json = json_encode(
+            $this->result->jsonSerialize()
         );
+        self::assertJson($json);
     }
 }

@@ -8,7 +8,7 @@
  */
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../src/Controller/BaseController.php';
+require_once __DIR__ . '/../src/Controller/ResultsController.php';
 
 use MiW\Results\Utils;
 use Symfony\Component\Config\FileLocator;
